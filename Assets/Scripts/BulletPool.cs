@@ -3,26 +3,45 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] int initialPoolSize = 10;
+    //[SerializeField] GameObject bulletPrefab;
+    //[SerializeField] int initialPoolSize = 10;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    //Á÷·ÄÈ­: https://wlsdn629.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-SystemSerializable%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90
+    [System.Serializable]
+    public class BulletType
+    {
+        public GameObject bulletPrefab;
+        public int initialPoolSize;
+    }
+
+    [SerializeField] BulletType[] bulletTypes;
+
+    //private Queue<GameObject> pool = new Queue<GameObject>();
+    private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
 
     private void Start()
     {
-        for (int i = 0; i < initialPoolSize; i++)
+        foreach (var bulletType in bulletTypes)
         {
-            GameObject bullet = Instantiate(bulletPrefab);
-            bullet.SetActive(false);
-            pool.Enqueue(bullet);
+            Queue<GameObject> pool = new Queue<GameObject>();
+
+            for (int i = 0; i < bulletType.initialPoolSize; i++)
+            {
+                GameObject bullet = Instantiate(bulletType.bulletPrefab);
+                bullet.transform.parent = transform;
+                bullet.SetActive(false);
+                pool.Enqueue(bullet);
+            }
+
+            pools[bulletType.bulletPrefab] = pool;
         }
     }
 
-    public GameObject GetBullet()
+    public GameObject GetBullet(GameObject bulletPrefab)
     {
-        if (pool.Count > 0)
+        if (pools.ContainsKey(bulletPrefab) && pools.Count > 0)
         {
-            GameObject bullet = pool.Dequeue();
+            GameObject bullet = pools[bulletPrefab].Dequeue();
             bullet.SetActive(true);
             return bullet;
         }
@@ -34,9 +53,16 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    public void ReturnBullet(GameObject bullet)
+    public void ReturnBullet(GameObject bulletPrefab, GameObject bullet)
     {
-        bullet.SetActive(false);
-        pool.Enqueue(bullet);
+        if (pools.ContainsKey(bulletPrefab))
+        {
+            bullet.SetActive(false);
+            pools[bulletPrefab].Enqueue(bullet);
+        }
+        else
+        {
+            Destroy(bullet);
+        }
     }
 }

@@ -8,8 +8,10 @@ public class TowerController : MonoBehaviour
 
     [SerializeField] public BulletPool bulletPool;
 
+    [SerializeField] GameObject[] bulletPrefabs; // 총알 프리팹 배열
+
     //프리팹: 게임 오브젝트 설계도 => 유니티에서 게임 오브젝트를 생성할 때 복사할 원본
-    [SerializeField] GameObject bulletPrefab; //생성할 총알 프리팹
+    //[SerializeField] GameObject bulletPrefab; //생성할 총알 프리팹
 
     //[SerializeField] float bulletTime; //총알 생성 시간
     [SerializeField] float minBulletTime;
@@ -55,17 +57,30 @@ public class TowerController : MonoBehaviour
             //Bullet bullet = bulletGameObj.GetComponent<Bullet>();
             //bullet.SetTarget(target);
 
-            GameObject bulletGameObj = bulletPool.GetBullet();
-            Bullet bullet = bulletGameObj.GetComponent<Bullet>();
-            bullet.SetTarget(target, bulletPool);
+            //GameObject bulletGameObj = bulletPool.GetBullet();
+            //Bullet bullet = bulletGameObj.GetComponent<Bullet>();
+            //bullet.SetTarget(target, bulletPool);
 
-            bulletGameObj.transform.position = transform.position;
-            bulletGameObj.transform.rotation = transform.rotation;
+            //bulletGameObj.transform.position = transform.position;
+            //bulletGameObj.transform.rotation = transform.rotation;
 
-            //다음 총알을 생성할 때까지 남은 시간을 다시 설정
-            //remainTime = bulletTime;
+            // 총알 프리팹을 랜덤으로 선택
+            GameObject bulletPrefab = bulletPrefabs[Random.Range(0, bulletPrefabs.Length)];
 
-            RandomFireTime();
+            GameObject bulletGameObj = bulletPool.GetBullet(bulletPrefab);
+            if (bulletGameObj != null)
+            {
+                Bullet bullet = bulletGameObj.GetComponent<Bullet>();
+                bullet.SetTarget(target, bulletPool, bulletPrefab);
+
+                bulletGameObj.transform.position = transform.position;
+                bulletGameObj.transform.rotation = transform.rotation;
+
+                //다음 총알을 생성할 때까지 남은 시간을 다시 설정
+                //remainTime = bulletTime;
+
+                RandomFireTime();
+            }
         }
     }
 

@@ -1988,6 +1988,29 @@ PrefabInstance:
       propertyPath: minBulletTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 722938058744833456, guid: 3bc391f3c795577469207e5052b1de0f,
+        type: 3}
+      propertyPath: bulletPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 722938058744833456, guid: 3bc391f3c795577469207e5052b1de0f,
+        type: 3}
+      propertyPath: bulletPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 976922433393362491, guid: 3c1903b6e36903e4180e5f40216c643e,
+        type: 3}
+    - target: {fileID: 722938058744833456, guid: 3bc391f3c795577469207e5052b1de0f,
+        type: 3}
+      propertyPath: bulletPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 976922433393362491, guid: 6816c23dc3d2df64882214eb03e297e1,
+        type: 3}
+    - target: {fileID: 722938058744833456, guid: 3bc391f3c795577469207e5052b1de0f,
+        type: 3}
+      propertyPath: bulletPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 976922433393362491, guid: 8c898bbbb03e08e48b64107279b9c4ea,
+        type: 3}
     - target: {fileID: 722938058744833459, guid: 3bc391f3c795577469207e5052b1de0f,
         type: 3}
       propertyPath: m_RootOrder
