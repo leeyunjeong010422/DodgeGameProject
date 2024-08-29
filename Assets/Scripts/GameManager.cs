@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameState curState;
     [SerializeField] PlayerMover player;
     [SerializeField] TowerController[] towers;
+    [SerializeField] BulletPool bulletPool;
 
     [Header("UI")]
     [SerializeField] Text readyText;
@@ -40,6 +41,11 @@ public class GameManager : MonoBehaviour
         readyText.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
+
+        foreach (var tower in towers)
+        {
+            tower.bulletPool = bulletPool;
+        }
 
     }
 

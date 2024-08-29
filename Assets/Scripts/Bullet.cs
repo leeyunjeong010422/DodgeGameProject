@@ -25,17 +25,23 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Transform target;
 
+    private BulletPool bulletPool;
+
     private void Start()
     {
-        //LookAt: 타겟 방향을 바라보는 회전
-        transform.LookAt(target.position);
+        if (target != null)
+        {
+            //LookAt: 타겟 방향을 바라보는 회전
+            transform.LookAt(target.position);
 
-        rigid.velocity = transform.forward * speed;
+            rigid.velocity = transform.forward * speed;
+        }
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(Transform target, BulletPool pool)
     {
         this.target = target;
+        this.bulletPool = pool;
     }
 
     //충돌(Collision): 물리적 충돌을 확인
@@ -52,7 +58,8 @@ public class Bullet : MonoBehaviour
             playerMover.TakeHit();
         }
         //Destroy: 게임 오브젝트 삭제
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        bulletPool.ReturnBullet(gameObject);
     }
 
 }

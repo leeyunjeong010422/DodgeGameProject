@@ -6,6 +6,8 @@ public class TowerController : MonoBehaviour
 {
     [SerializeField] Transform target;
 
+    [SerializeField] public BulletPool bulletPool;
+
     //프리팹: 게임 오브젝트 설계도 => 유니티에서 게임 오브젝트를 생성할 때 복사할 원본
     [SerializeField] GameObject bulletPrefab; //생성할 총알 프리팹
 
@@ -49,10 +51,16 @@ public class TowerController : MonoBehaviour
             //bulletPrefab 설계도를 토대로 총알을 생성
             //Instantiate: 프리팹을 토대로 게임 오브젝트 생성하기
             //Instantiate(프리팹, 위치, 회전); 으로 사용함
-            GameObject bulletGameObj = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            //GameObject bulletGameObj = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            //Bullet bullet = bulletGameObj.GetComponent<Bullet>();
+            //bullet.SetTarget(target);
+
+            GameObject bulletGameObj = bulletPool.GetBullet();
             Bullet bullet = bulletGameObj.GetComponent<Bullet>();
-            //bullet.SetDestination(target.position);
-            bullet.SetTarget(target);
+            bullet.SetTarget(target, bulletPool);
+
+            bulletGameObj.transform.position = transform.position;
+            bulletGameObj.transform.rotation = transform.rotation;
 
             //다음 총알을 생성할 때까지 남은 시간을 다시 설정
             //remainTime = bulletTime;

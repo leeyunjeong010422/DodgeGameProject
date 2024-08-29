@@ -864,6 +864,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 722938059245699942}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &860006084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 398145366919887592, guid: 3bc391f3c795577469207e5052b1de0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 722938059245699942}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154d13da05bc5404b868d6b5792ae57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,13 +1150,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211821575}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1211821580
 MonoBehaviour:
@@ -1373,7 +1385,7 @@ Transform:
   - {fileID: 977022011}
   - {fileID: 2035960588}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1760952686
 GameObject:
@@ -1775,6 +1787,7 @@ MonoBehaviour:
   curState: 0
   player: {fileID: 0}
   towers: []
+  bulletPool: {fileID: 860006084}
   readyText: {fileID: 1626216196}
   gameOverText: {fileID: 115016351}
   timerText: {fileID: 1876293368}

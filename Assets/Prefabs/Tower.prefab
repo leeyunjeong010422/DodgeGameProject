@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 722938058744833461}
   - component: {fileID: 722938058744833460}
   - component: {fileID: 722938058744833456}
+  - component: {fileID: 398145366919887592}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
@@ -112,9 +113,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  bulletPool: {fileID: 398145366919887592}
   bulletPrefab: {fileID: 976922433393362491, guid: 3c1903b6e36903e4180e5f40216c643e,
     type: 3}
   minBulletTime: 1
   maxBulletTime: 3
   remainTime: 0
   isAttacking: 0
+--- !u!114 &398145366919887592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722938058744833463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154d13da05bc5404b868d6b5792ae57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 976922433393362491, guid: 6816c23dc3d2df64882214eb03e297e1,
+    type: 3}
+  initialPoolSize: 10
