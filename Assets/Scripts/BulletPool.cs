@@ -60,7 +60,7 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            // Pool이 비어있는 경우 새로운 총알을 생성
+            //비어있는 경우 새로운 총알을 생성
             GameObject bullet = Instantiate(bulletPrefab);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.SetTarget(target, this, bulletPrefab, speed);

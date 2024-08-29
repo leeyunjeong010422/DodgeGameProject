@@ -47,6 +47,8 @@ public class Timer : MonoBehaviour
         if ((int)Sec == 10 && !towersSpawned)
         {
             difficulty.LevelHigh();
+            difficulty.LevelHigh();
+            difficulty.LevelHigh();
             towersSpawned = true;
         }
 
