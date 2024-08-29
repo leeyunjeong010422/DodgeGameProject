@@ -19,9 +19,16 @@ public class BulletPool : MonoBehaviour
 
     //private Queue<GameObject> pool = new Queue<GameObject>();
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
+    private Transform playerTransform;
 
     private void Start()
     {
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTransform = playerObj.transform;
+        }
+
         foreach (var bulletType in bulletTypes)
         {
             Queue<GameObject> pool = new Queue<GameObject>();
@@ -42,8 +49,11 @@ public class BulletPool : MonoBehaviour
     {
         if (pools.ContainsKey(bulletPrefab) && pools[bulletPrefab].Count > 0)
         {
+            //큐에서 총알을 꺼내 활성화
             GameObject bullet = pools[bulletPrefab].Dequeue();
             bullet.SetActive(true);
+
+            //타겟과 속도를 정함
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.SetTarget(target, this, bulletPrefab, speed);
             return bullet;
