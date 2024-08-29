@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking.Types;
 
 //컴포넌트: 게임 오브젝트의 기능을 담당하는 부품
 public class PlayerMover : MonoBehaviour

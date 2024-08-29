@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -39,11 +37,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void SetTarget(Transform target, BulletPool pool, GameObject bulletPrefab)
+    public void SetTarget(Transform target, BulletPool pool, GameObject bulletPrefab, float speed)
     {
         this.target = target;
         this.bulletPool = pool;
         this.bulletPrefab = bulletPrefab;
+        this.speed = speed;
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)

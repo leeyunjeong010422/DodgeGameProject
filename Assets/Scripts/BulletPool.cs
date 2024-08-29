@@ -12,6 +12,7 @@ public class BulletPool : MonoBehaviour
     {
         public GameObject bulletPrefab;
         public int initialPoolSize;
+        public float speed;
     }
 
     [SerializeField] BulletType[] bulletTypes;
@@ -37,18 +38,22 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    public GameObject GetBullet(GameObject bulletPrefab)
+    public GameObject GetBullet(GameObject bulletPrefab, Transform target, float speed)
     {
-        if (pools.ContainsKey(bulletPrefab) && pools.Count > 0)
+        if (pools.ContainsKey(bulletPrefab) && pools[bulletPrefab].Count > 0)
         {
             GameObject bullet = pools[bulletPrefab].Dequeue();
             bullet.SetActive(true);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.SetTarget(target, this, bulletPrefab, speed);
             return bullet;
         }
         else
         {
             // Pool이 비어있는 경우 새로운 총알을 생성
             GameObject bullet = Instantiate(bulletPrefab);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.SetTarget(target, this, bulletPrefab, speed);
             return bullet;
         }
     }

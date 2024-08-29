@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerController : MonoBehaviour
@@ -7,8 +5,8 @@ public class TowerController : MonoBehaviour
     [SerializeField] Transform target;
 
     [SerializeField] public BulletPool bulletPool;
-
-    [SerializeField] GameObject[] bulletPrefabs; // 총알 프리팹 배열
+    [SerializeField] BulletPool.BulletType[] bulletTypes;
+    //[SerializeField] GameObject[] bulletPrefabs; // 총알 프리팹 배열
 
     //프리팹: 게임 오브젝트 설계도 => 유니티에서 게임 오브젝트를 생성할 때 복사할 원본
     //[SerializeField] GameObject bulletPrefab; //생성할 총알 프리팹
@@ -64,25 +62,26 @@ public class TowerController : MonoBehaviour
             //bulletGameObj.transform.position = transform.position;
             //bulletGameObj.transform.rotation = transform.rotation;
 
-            // 총알 프리팹을 랜덤으로 선택
-            GameObject bulletPrefab = bulletPrefabs[Random.Range(0, bulletPrefabs.Length)];
+            // BulletType 배열에서 랜덤으로 하나의 BulletType을 선택
+            BulletPool.BulletType bulletType = bulletTypes[Random.Range(0, bulletTypes.Length)];
+            GameObject bulletPrefab = bulletType.bulletPrefab;
+            float speed = bulletType.speed;
 
-            GameObject bulletGameObj = bulletPool.GetBullet(bulletPrefab);
+            // 총알을 풀에서 가져오고 타겟 설정
+            GameObject bulletGameObj = bulletPool.GetBullet(bulletPrefab, target, speed);
             if (bulletGameObj != null)
             {
-                Bullet bullet = bulletGameObj.GetComponent<Bullet>();
-                bullet.SetTarget(target, bulletPool, bulletPrefab);
-
+                // 총알의 위치와 회전을 타워의 위치와 동일하게 설정
                 bulletGameObj.transform.position = transform.position;
                 bulletGameObj.transform.rotation = transform.rotation;
+            }
 
-                //다음 총알을 생성할 때까지 남은 시간을 다시 설정
-                //remainTime = bulletTime;
+            //다음 총알을 생성할 때까지 남은 시간을 다시 설정
+            //remainTime = bulletTime;
 
-                RandomFireTime();
+            RandomFireTime();
             }
         }
-    }
 
     //총알 발사 시간 랜덤으로 설정하기
     private void RandomFireTime()
