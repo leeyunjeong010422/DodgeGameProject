@@ -9,7 +9,9 @@ public class TowerController : MonoBehaviour
     //프리팹: 게임 오브젝트 설계도 => 유니티에서 게임 오브젝트를 생성할 때 복사할 원본
     [SerializeField] GameObject bulletPrefab; //생성할 총알 프리팹
 
-    [SerializeField] float bulletTime; //총알 생성 시간
+    //[SerializeField] float bulletTime; //총알 생성 시간
+    [SerializeField] float minBulletTime;
+    [SerializeField] float maxBulletTime;
     [SerializeField] float remainTime; //다음 총알 생성할 때까지 기다린 시간
     [SerializeField] bool isAttacking; //공격 여부
 
@@ -27,6 +29,8 @@ public class TowerController : MonoBehaviour
         //transform 컴포넌트는 몯든 게임 오브젝트에 반드시 있음 => transform 컴포넌트만 특별하게 프로퍼티로 바로 사용 가능
         target = playerObj.transform;
         //===========================================================================================
+
+        RandomFireTime();
     }
 
     private void Update()
@@ -51,8 +55,15 @@ public class TowerController : MonoBehaviour
             bullet.SetTarget(target);
 
             //다음 총알을 생성할 때까지 남은 시간을 다시 설정
-            remainTime = bulletTime;
+            //remainTime = bulletTime;
+
+            RandomFireTime();
         }
+    }
+
+    private void RandomFireTime()
+    {
+        remainTime = Random.Range(minBulletTime, maxBulletTime);
     }
 
     public void StartAttack()

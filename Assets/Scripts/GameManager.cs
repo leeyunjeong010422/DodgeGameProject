@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] Text readyText;
     [SerializeField] Text gameOverText;
+    [SerializeField] Text timerText;
+    [SerializeField] Timer timer;
 
 
     private void Start()
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
         player.OnDied += GameOver;
         readyText.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
 
 
 
@@ -50,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
 
         //어느 키를 눌러야 재시작이 되는지
-        else if (curState == GameState.GameOver && Input.anyKeyDown)
+        else if (curState == GameState.GameOver && Input.GetKeyDown(KeyCode.D))
         {
             //씬을 재로딩하면 됨
             SceneManager.LoadScene("DodgeScene");
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
 
         readyText.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(true);
     }
 
     public void GameOver()
@@ -81,5 +85,7 @@ public class GameManager : MonoBehaviour
 
         readyText.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
+        timerText.gameObject.SetActive(true);
+        timer.StopTimer();
     }
 }

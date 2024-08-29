@@ -46,6 +46,9 @@ public class PlayerMover : MonoBehaviour
         //리지드바디: 물리엔진 담당의 컴포넌트 => FixedUpdate()에서 돌아가고 있음 (지정된 속도(=moveSpeed) 만큼)
         //AddForce, AddTorque, Velocity, angleVelocity
         rigid.velocity = moveDir * moveSpeed;
+
+        //트랜스폼: 위치, 회전, 크기 담당의 컴포넌트
+        //Translate, position, MoveTowardm Lerp/Rotate, rotation(쿼터니언 -> 오일러), RotateAround, LookAt
     }
 
     public void TakeHit()
