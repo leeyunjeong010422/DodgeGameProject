@@ -61,6 +61,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
+    //총알 발사 시간 랜덤으로 설정하기
     private void RandomFireTime()
     {
         remainTime = Random.Range(minBulletTime, maxBulletTime);

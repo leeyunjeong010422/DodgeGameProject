@@ -41,6 +41,8 @@ public class Timer : MonoBehaviour
         //    towersSpawned = true;
         //}
 
+
+        //나중에 코루틴 사용해서 10초마다 1개씩 생성하게 수정
         //타이머가 10초가 되면 랜덤 위치에 타워 생성
         if ((int)Sec == 10 && !towersSpawned)
         {

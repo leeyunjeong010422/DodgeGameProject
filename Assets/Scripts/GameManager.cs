@@ -41,8 +41,6 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
 
-
-
     }
 
     private void Update()
