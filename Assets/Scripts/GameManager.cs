@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //ΩÃ±€≈Ê∆–≈œ
+    public static GameManager Instance { get; private set; }
     public enum GameState { Ready, Running, GameOver }
 
     [SerializeField] GameState curState;
@@ -15,8 +17,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text readyText;
     [SerializeField] Text gameOverText;
     [SerializeField] Text timerText;
-    [SerializeField] Timer timer;
 
+    //ΩÃ±€≈Ê∆–≈œ
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -49,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //æ∆π´≈∞≥™ ¥©∏£∏È ∞‘¿” Ω√¿€
         if(curState == GameState.Ready && Input.anyKeyDown)
         {
             GameStart();
@@ -88,6 +103,9 @@ public class GameManager : MonoBehaviour
         readyText.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
-        timer.StopTimer();
+        //timer.StopTimer();
+        
+        //≈∏¿Ã∏” ∏ÿ√ﬂ±‚ ΩÃ±€≈Ê ªÁøÎ
+        Timer.Instance.StopTimer(); 
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 //Timer 스크립트 인터넷 참고: https://gyong0.tistory.com/13
 public class Timer : MonoBehaviour
 {
+    public static Timer Instance { get; private set; }
+
     float Sec;
     int Min;
     bool towersSpawned = false;
@@ -12,6 +14,19 @@ public class Timer : MonoBehaviour
     [SerializeField] LevelOfDifficulty difficulty;
 
     public bool isRunning = true;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Update()
     {
