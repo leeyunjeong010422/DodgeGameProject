@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//Timer 관련 코드들은... 인터넷 참고를 많이 하여 만들었습니당..
 //Timer 스크립트 인터넷 참고: https://gyong0.tistory.com/13
 public class Timer : MonoBehaviour
 {
@@ -75,9 +76,19 @@ public class Timer : MonoBehaviour
         }
 
     }
+    public void StartTimer()
+    {
+        isRunning = true;
+    }
 
     public void StopTimer()
     {
         isRunning = false;
+    }
+
+    //최고기록 점수를 초로 받아옴
+    public float GetElapsedTime()
+    {
+        return Min * 60 + Sec;
     }
 }
